@@ -29,6 +29,7 @@
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
   {%- assign first_3d_model = product.media | where: "media_type", "model" | first -%}
+
   {%- if first_3d_model -%}
     {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
     <link
@@ -499,6 +500,24 @@
                             {{ value }}
                           </label>
                         {%- endfor -%}
+
+{% comment %} start-ECOM
+----Add the variant options “Small”, “Medium”, “Large” - as a Dropdown
+{% endcomment %}
+
+<div class="">
+  <div class="Polaris-Select">
+    <select id="PolarisSelect1" class="Polaris-Select__Input" aria-invalid="false" placeholder="Select">
+      <option disabled selected hidden>Select</option>
+      <option value="Small" >Small</option>
+      <option value="Medium">Medium</option>
+      <option value="Large">Large</option>
+    </select>
+</div>
+
+{% comment %} End-ECOM {% endcomment %}
+
+
                       </fieldset>
                     {%- endfor -%}
                     <script type="application/json">
