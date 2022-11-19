@@ -106,6 +106,19 @@
                 {%- if forloop.index > 2 -%}
                   {%- assign lazy_load = true -%}
                 {%- endif -%}
+                
+
+{% comment %} start-ECOM
+----Make Soft Winter Jacket Disappear in the Menu
+{% endcomment %}
+
+{%- if product.title == "Soft Winter Jacket" -%}
+      {%- continue -%}
+{%- endif -%} 
+
+{% comment %} End-ECOM {% endcomment %}
+
+
                 <li class="grid__item">
                   {% render 'card-product',
                     card_product: product,
