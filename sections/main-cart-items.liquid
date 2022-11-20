@@ -93,6 +93,34 @@
 {% endif %}
 {% comment %} End-ECOM {% endcomment %}
 
+
+{% comment %} start-ECOM
+----Automatically removes Soft Winter Jacket when Handbag with Black and Medium variant (variant id : 43989052064051) is removed. 
+{% endcomment %}
+{% assign handbag = false %}
+{%- for findHandbag in cart.items -%}
+      {%- if findHandbag.id == 43989052064051 -%}
+        {% assign handbag = true %}
+      {%- endif -%}
+{%- endfor -%}     
+
+{% if handbag == false %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+      $( document ).ready(function () {
+        $.post('/cart/update.js', {
+          updates: {
+          43970235105587: 0
+          },
+          function(res){
+            console.log(res)
+          }
+        });
+      });
+  </script>
+{%- endif -%}
+{% comment %} End-ECOM {% endcomment %}
+
                     {% if item.image %}
                       {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
                       <a href="{{ item.url }}" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
