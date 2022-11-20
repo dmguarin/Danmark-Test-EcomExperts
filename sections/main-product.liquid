@@ -107,6 +107,8 @@
                 {% render 'product-thumbnail', media: featured_media, media_count: media_count, position: media_position, desktop_layout: section.settings.gallery_layout, mobile_layout: section.settings.mobile_thumbnails, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: false %}
               </li>
             {%- endif -%}
+
+
             {%- for media in product.media -%}
               {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
                 <li
@@ -125,6 +127,8 @@
                 </li>
               {%- endunless -%}
             {%- endfor -%}
+
+
           </ul>
           <div class="slider-buttons no-js-hidden quick-add-hidden{% if hide_mobile_slider %} small-hide{% endif %}">
             <button
@@ -504,7 +508,7 @@
 {% comment %} start-ECOM
 ----Add the variant options “Small”, “Medium”, “Large” - as a Dropdown
 {% endcomment %}
-
+{% comment %}
 <div class="">
   <div class="Polaris-Select">
     <select id="PolarisSelect1" class="Polaris-Select__Input" aria-invalid="false" placeholder="Select">
@@ -514,7 +518,7 @@
       <option value="Large">Large</option>
     </select>
 </div>
-
+{% endcomment %}
 {% comment %} End-ECOM {% endcomment %}
 
 
@@ -659,6 +663,23 @@
                     </div>
                   {%- endform -%}
                 </product-form>
+
+{% comment %} - Test script - 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      $( ".product-form" ).submit(function () {
+        $.post('/cart/add.js', {
+          items: [{
+            quantity: 1,
+            id: 43970235105587          
+          }],
+          function(res){
+            console.log(res)
+          }
+        });
+      });
+</script>
+{% endcomment %}
 
                 {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
 
