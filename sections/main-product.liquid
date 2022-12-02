@@ -28,6 +28,7 @@
   
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'imageClick.js' | asset_url }}" defer="defer"></script>
 
   {%- assign first_3d_model = product.media | where: "media_type", "model" | first -%}
 
@@ -1159,6 +1160,15 @@
       assign seo_media = product.featured_media
     endif
   -%}
+
+{% comment %} start-ECOM
+----Default dropdown options is unselected.
+{% endcomment %}
+
+{{ '//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js' | script_tag }}
+<script src="{{ 'default-dropdown.js' | asset_url }}" defer="defer"></script>
+
+{% comment %} End-ECOM {% endcomment %}
 
   <script type="application/ld+json">
     {
