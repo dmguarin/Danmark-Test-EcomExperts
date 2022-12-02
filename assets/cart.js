@@ -96,7 +96,38 @@ class CartItems extends HTMLElement {
           trapFocus(cartDrawerWrapper, document.querySelector('.cart-item__name'))
         }
         this.disableLoading();
-      }).catch(() => {
+      })
+
+
+      // start-ECOM
+      // ----Automatically removes Soft Winter Jacket when Handbag with Black and Medium variant (variant id : 43989052064051) is removed.   
+      .then(() => {
+        axios.get('/cart.js')
+          .then(function (response) {
+            // handle success
+            const handbagBlackMedium = response.data.items.find((item) => item.variant_id === 43989052064051);
+            console.log(handbagBlackMedium);
+            if (!handbagBlackMedium) {
+              console.log("remove winter jacket");
+              axios.post('/cart/update.js', {
+                updates: {
+                  43970235105587: 0
+                },
+                function(res) {
+                  console.log(res)
+                }
+              })
+                .then(() => {
+                  location.reload();
+                });
+            } else {
+              console.log("There's a Black Medium Handbag in your cart");
+            }
+          })
+      })
+      // End-ECOM
+
+      .catch(() => {
         this.querySelectorAll('.loading-overlay').forEach((overlay) => overlay.classList.add('hidden'));
         const errors = document.getElementById('cart-errors') || document.getElementById('CartDrawer-CartErrors');
         errors.textContent = window.cartStrings.error;

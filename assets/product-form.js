@@ -62,6 +62,34 @@ if (!customElements.get('product-form')) {
             this.cart.renderContents(response);
           }
         })
+
+        // start-ECOM
+        // ----Automatically adds Soft Winter Jacket when Handbag with Black and Medium variant (variant id : 43989052064051) is added.        
+        .then(() => {
+          axios.get('/cart.js')
+            .then(function (response) {
+              // handle success
+              const handbagBlackMedium = response.data.items.find((item) => item.variant_id === 43989052064051);
+              const softWinterJacket = response.data.items.find((item) => item.variant_id === 43970235105587);
+              console.log(handbagBlackMedium);
+              if (handbagBlackMedium && !softWinterJacket) {
+                console.log("You have a free winterjacket");
+                axios.post('/cart/add.js', {
+                  items: [{
+                    quantity: 1,
+                    id: 43970235105587
+                  }],
+                  function(res) {
+                    console.log(res)
+                  }
+                });
+              } else {
+                console.log("No handbag Black Medium in your cart");
+              }
+            })
+        })
+        // End-ECOM
+
         .catch((e) => {
           console.error(e);
         })

@@ -20,6 +20,7 @@
 {%- endstyle -%}
 
 {%- unless settings.cart_type == 'drawer' -%}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 {%- endunless -%}
 
@@ -68,6 +69,8 @@
 {% comment %} start-ECOM
 ----Automatically adds Soft Winter Jacket when Handbag with Black and Medium variant (variant id : 43989052064051) is added. 
 {% endcomment %}
+
+{% comment %}
 {% assign softWinterJacket = false %}
 {%- for findSoftwinterJacket in cart.items -%}
       {%- if findSoftwinterJacket.id == 43970235105587 -%}
@@ -91,12 +94,16 @@
       });
   </script>
 {% endif %}
+{% endcomment %}
+
 {% comment %} End-ECOM {% endcomment %}
 
 
 {% comment %} start-ECOM
 ----Automatically removes Soft Winter Jacket when Handbag with Black and Medium variant (variant id : 43989052064051) is removed. 
 {% endcomment %}
+
+{% comment %}
 {% assign handbag = false %}
 {%- for findHandbag in cart.items -%}
       {%- if findHandbag.id == 43989052064051 -%}
@@ -119,6 +126,8 @@
       });
   </script>
 {%- endif -%}
+{% endcomment %}
+
 {% comment %} End-ECOM {% endcomment %}
 
                     {% if item.image %}
